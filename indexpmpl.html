@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,90 +10,22 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
     <style>
-      .half-circle-left {
-        width: 30px;
-        height: 15px;
-        background-color: white;
-        border-top-left-radius: 110px;
-        border-top-right-radius: 110px;
-        border: 1px solid gray;
-        border-bottom: 0;
-        transform: rotate(90deg);
-        position: absolute;
-        top: 50%;
-        left: -23px;
-        transform: translateY(-50%) rotate(90deg);
-      }
-      .half-circle-right {
-        width: 30px;
-        height: 15px;
-        background-color: rgb(255, 255, 255);
-        border-top-left-radius: 110px;
-        border-top-right-radius: 110px;
-        border: 1px solid gray;
-        border-bottom: 0;
-        transform: rotate(270deg);
-        position: absolute;
-        top: 50%;
-        right: -23px;
-        transform: translateY(-50%) rotate(270deg);
-      }
-      .circular-border {
+      .pulse-logo {
         border-radius: 50%;
-        animation: blink-scale 2.5s infinite;
+        animation: blink-scale 2.5s infinite ease-in-out;
       }
+
       @keyframes blink-scale {
-        0%,
-        100% {
+        0%, 100% {
           transform: scale(1.4);
           opacity: 1;
         }
         50% {
-          transform: scale(.5);
+          transform: scale(0.5);
           opacity: 1;
         }
       }
-      .text-center {
-        text-align: center;
-      }
-      .text-align-left {
-        text-align: left;
-      }
-      .right-align-container {
-        display: flex;
-        justify-content: flex-end;
-        padding-right: 15px; /* Move fare section slightly to the left */
-      }
-      .text-align-center {
-        text-align: center;
-      }
-      .text-align-right {
-        text-align: right;
-      }
-      .id-container {
-        display: flex;
-        justify-content: center;
-        padding-left: 20px;
-      }
-      .red-band-text {
-        font-size: 1.2rem;
-      }
-      .one-day-pass-text {
-        font-size: 1rem;
-        padding: 0.1rem 0;
-      }
-      .content {
-        margin-top: 4rem;
-      }
-      @media (max-width: 640px) {
-        .max-w-lg {
-          max-width: 100%;
-        }
-        .w-32 {
-          width: 24vw;
-          height: 24vw;
-        }
-      }
+
       body {
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -101,139 +34,207 @@
       }
       .underline-offset {
         text-decoration: underline;
-        text-underline-offset: 3px; /* Adjust underline position */
+        text-underline-offset: 3px;
       }
     </style>
   </head>
-  <body
-    class="bg-blue-100 flex items-center justify-center min-h-screen p-4 text-center"
-  >
+  <body class="bg-blue-100 flex items-center justify-center min-h-screen p-4 text-center">
+    <!-- Top buttons -->
     <div class="absolute top-4 left-4">
-      <button type="button" style="font-size: 1.2rem; color: #000;" onclick="window.location.href='index.html'">
+      <button type="button" style="font-size: 1.2rem; color: #000" onclick="window.location.href='index.html'">
         &#x2715;
       </button>
     </div>
-    <div class="absolute top-4 right-4">
-      <button type="button" style="font-size: 1rem;" onclick="window.location.href='index.html'">
+    <div class="absolute top-4 right-4 flex gap-4">
+      <button type="button" style="font-size: 1rem" onclick="window.location.href='https://complaints.pmpml.org/home'">
+        <span class="underline-offset">Need Help?</span>
+      </button>
+      <button type="button" style="font-size: 1rem" onclick="window.location.href='help.html'">
         <span class="underline-offset">All passes</span>
       </button>
     </div>
-    <div
-      class="bg-white rounded-lg shadow-lg w-full max-w-lg relative text-center content"
-    >
-      <div class="bg-red-600 text-white text-center py-2 rounded-t-lg">
-        <p class="red-band-text">पुणे महानगर परिवहन महामंडळ लि.</p>
-      </div>
-      <div class="p-4 text-center">
-        <div class="flex flex-wrap justify-between text-sm mb-4">
-          <div class="w-1/3 mb-2 text-align-left">
-            <p class="text-gray-500">Pass Type</p>
-            <p class="font-bold text-xl">Only PCMC</p> <!-- Increased font size -->
-          </div>
-          <div class="w-1/3 mb-2 id-container">
-            <div class="text-align-left">
-              <p class="text-gray-500">ID</p>
-              <p class="font-bold text-xl">2203</p> <!-- Increased font size -->
-            </div>
-          </div>
-          <div class="w-1/3 mb-2 right-align-container">
-            <div class="text-align-left">
-              <p class="text-gray-500">Fare</p>
-              <p class="font-bold text-xl">₹40</p> <!-- Increased font size -->
-            </div>
-          </div>
-        </div>
-        <div class="relative">
-          <hr
-            style="
-              border: none;
-              border-top: 1px dashed gray;
-              border-image: repeating-linear-gradient(
-                  90deg,
-                  gray,
-                  gray 6px,
-                  transparent 6px,
-                  transparent 10px
-                )
-                10;
-              margin: 0; /* Remove side gaps */
-            "
-          />
-          <div class="half-circle-left"></div>
-          <div class="half-circle-right"></div>
-        </div>
-        <div class="flex flex-wrap justify-between text-sm mb-4 mt-6">
-          <div class="w-1/2 mb-2 text-align-left">
-            <p class="text-gray-500">Booking Time</p>
-            <p class="font-bold"><span id="booking-date"></span> | 08:01 AM</p>
-          </div>
-          <div class="w-1/2 mb-2 right-align-container">
-            <div class="text-align-left">
-              <p class="text-gray-500">Validity Time</p>
-              <p class="font-bold"><span id="validity-date"></span> | 11:59 PM</p>
-            </div>
-          </div>
-        </div>
-        <div class="text-center text-sm mb-7 mt-4"> <!-- Adjusted margin for unique number -->
-          <p id="unique-number"></p> <!-- Unique number will be generated here -->
-        </div>
-        <div>
-          <hr
-            style="
-              border: none;
-              border-top: 1px dashed gray;
-              border-image: repeating-linear-gradient(
-                  90deg,
-                  gray,
-                  gray 6px,
-                  transparent 6px,
-                  transparent 10px
-                )
-                10;
-              margin: -15; /* Remove side gaps */
-            "
-          />
-        </div>
-        
-        <div class="flex justify-center my-8"> <!-- Increased margin for more space -->
-          <img
-            alt="PMPML logo with Marathi text"
-            class="w-32 h-32 circular-border"
-            src="unnamed (1).png"
-            style="margin-top: 2rem;"
 
-          />
+    <!-- Wrapper -->
+    <div class="w-full flex flex-col space-y-4">
+      <!-- Ticket Card -->
+      <div class="bg-white rounded-lg shadow-lg w-full min-h-[550px] flex flex-col justify-between">
+        <!-- Top Red Header -->
+        <div class="bg-red-600 text-white py-2 rounded-t-lg w-full">
+          <p class="red-band-text text-xl sm:text-2x2 text-center">पुणे महानगर परिवहन महामंडळ लि.</p>
         </div>
-      </div>
-      <div class="bg-red-600 text-white text-center one-day-pass-text rounded-b-lg">
-        <p>One Day Pass</p>
-      </div>
-    </div>
-    <div class="fixed bottom-4 right-4">
-      <a href="https://complaints.pmpml.org/home">
-        <button class="bg-white p-4 rounded-full shadow-lg">
-          <i class="fas fa-user"></i>
-        </button>
-      </a>
-    </div>
+
+        <!-- Content -->
+        <div class="px-2 py-2 sm:px-6 flex flex-col gap-4">
+          <!-- Pass Type, ID, Fare -->
+          <div class="flex justify-between items-center text-base sm:text-lg font-semibold">
+            <div class="flex-1 text-left">
+              <p class="text-gray-500 text-sm sm:text-base">Pass Type</p>
+              <p class="font-bold text-lg sm:text-xl">PMC & PCMC</p>
+            </div>
+            <div class="flex-1 text-center">
+              <p class="text-gray-500 text-sm sm:text-base">ID</p>
+              <p class="font-bold text-lg sm:text-xl">2203</p>
+            </div>
+            <div class="flex-1 text-right">
+              <p class="text-gray-500 text-sm sm:text-base">Fare</p>
+              <p class="font-bold text-lg sm:text-xl">₹70</p>
+            </div>
+          </div>
+
+          <!-- Dashed line between Pass/Fare and Booking/Validity with blue cutout holes -->
+<div class="relative flex items-center my-3">
+  <!-- Left half-round cutout (blue background, card border se chipka) -->
+  <div class="absolute -left-7 w-8 h-8 bg-blue-100 rounded-full z-10"
+       style="clip-path: circle(50% 100% at 100% 50%); box-shadow: 0 0 0 0px #d1d5db00;"></div>
+  <!-- Dashed line -->
+  <hr class="flex-1 border-t border-dashed border-gray-400 z-0" />
+  <!-- Right half-round cutout (blue background, card border se chipka) -->
+  <div class="absolute -right-7 w-8 h-8 bg-blue-100 rounded-full z-10"
+       style="clip-path: circle(50% 100% at 0% 50%); box-shadow: 0 0 0 0px #d1d5db00;"></div>
+</div>
+
+          <!-- Booking / Validity -->
+          <div class="flex justify-between items-center text-base sm:text-lg font-semibold">
+            <div class="flex-1 text-left">
+              <p class="text-gray-500 text-sm sm:text-base">Booking Time</p>
+              <p class="font-bold text-base sm:text-lg">
+                <span id="booking-date">17 Mar, 25</span> | <span id="booking-time">07:55 AM</span>
+              </p>
+            </div>
+            <div class="flex-1 text-right">
+              <p class="text-gray-500 text-sm sm:text-base">Validity Time</p>
+              <p class="font-bold text-base sm:text-lg">
+                <span id="validity-date">17 Mar, 25</span> | 11:59 PM
+              </p>
+            </div>
+          </div>
+
+          <!-- Dashed line after Booking/Validity -->
+          <hr class="border-t border-dashed border-gray-400 my-1" />
+
+          <!-- Code (unique number) -->
+          <p class="text-center text-base sm:text-lg" id="unique-number">2503171327DCQEW1</p>
+
+          <!-- Logo -->
+          <div class="flex justify-center my-2">
+            <img src="unnamed (1).png" alt="PMPML Logo" class="w-24 h-24 sm:w-32 sm:h-32 pulse-logo" />
+          </div>
+        </div>
+
+        <!-- One Day Pass -->
+        <div class="bg-red-600 text-white py-0 w-full">
+          <p class="text-base sm:text-lg text-center">One Day Pass</p>
+        </div>
+
+        <!-- Expiry Bar -->
+        <div class="bg-gray-100 text-gray-700 py-0 rounded-b-lg w-full">
+          <p class="text-base sm:text-lg text-center">Expires in <span id="countdown">24:04:00</span></p>
+        </div>
+      </div> <!-- ✅ Card yahi close hota hai -->  
+
+      <!-- Show QR Code Button (niche alag, 1cm gap) -->
+<div style="height: 1cm;"></div>
+<button
+  id="openQR"
+  class="w-full max-w-lg mt-4 flex items-center justify-center gap-2 
+         bg-green-50 text-green-600 py-3 rounded-lg font-semibold 
+         shadow border border-green-500"
+>
+  <!-- QR Icon -->
+  <img 
+    width="24" 
+    height="24" 
+    src="https://img.icons8.com/forma-regular/24/00A000/qr-code.png" 
+    alt="qr-code"
+  />
+  Show QR code
+</button>
+
+
+<!-- QR Modal -->
+<div id="qrModal" class="hidden fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50">
+  <div class="bg-white p-1">
+    <!-- QR Code (Click to Close) -->
+    <img id="qrImage" src="10002421803.png" alt="QR Code" class="w-[280px] h-[280px] cursor-pointer" />
+  </div>
+</div>
+
+<script>
+  const qrModal = document.getElementById("qrModal");
+  const openQR = document.getElementById("openQR");
+  const qrImage = document.getElementById("qrImage");
+
+  // Open QR
+  openQR.addEventListener("click", () => {
+    qrModal.classList.remove("hidden");
+  });
+
+  // Close QR when image is clicked
+  qrImage.addEventListener("click", () => {
+    qrModal.classList.add("hidden");
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date();
+    const year = today.getFullYear().toString().slice(-2);
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const hour = '07';
+    const minute = '55';
+    const randomChars = Math.random().toString(36).substring(2, 8).toUpperCase();
+    const uniqueNumber = `${year}${month}${day}${hour}${minute}${randomChars}`;
+    document.getElementById('unique-number').textContent = uniqueNumber;
+
+    const options = { year: "2-digit", month: "short", day: "2-digit" };
+    const formattedDate = today
+      .toLocaleDateString("en-GB", options)
+      .replace(/ /g, " ");
+    document.getElementById("booking-date").textContent = formattedDate;
+    document.getElementById("validity-date").textContent = formattedDate;
+    document.getElementById("booking-time").textContent = "07:55 AM";
+  });
+
+  // Countdown Timer (from 07:55 AM to 11:59 PM)
+  function getSecondsUntilEnd() {
+    const now = new Date();
+    const end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 0);
+    const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 7, 55, 0);
+    let seconds = Math.floor((end - now) / 1000);
+    // If before 07:55 AM, show full duration
+    if (now < start) seconds = Math.floor((end - start) / 1000);
+    return seconds;
+  }
+  let timeLeft = getSecondsUntilEnd();
+  function updateCountdown() {
+    const hours = String(Math.floor(timeLeft / 3600)).padStart(2, "0");
+    const minutes = String(Math.floor((timeLeft % 3600) / 60)).padStart(2, "0");
+    const seconds = String(timeLeft % 60).padStart(2, "0");
+    document.getElementById("countdown").textContent = `${hours}:${minutes}:${seconds}`;
+    if (timeLeft > 0) timeLeft--;
+  }
+  setInterval(updateCountdown, 1000);
+    </script>
+
+    
+
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const today = new Date();
-        const year = today.getFullYear().toString().slice(-2);
-        const month = String(today.getMonth() + 1).padStart(2, '0');
-        const day = String(today.getDate()).padStart(2, '0');
-        const hour = '08';
-        const minute = '01';
-        const randomChars = Math.random().toString(36).substring(2, 8).toUpperCase();
-        const uniqueNumber = `${year}${month}${day}${hour}${minute}${randomChars}`;
-        document.getElementById('unique-number').textContent = uniqueNumber;
+      // Countdown Timer (24h)
+      let timeLeft = 24 * 60 * 60;
+      function updateCountdown() {
+        const hours = String(Math.floor(timeLeft / 3600)).padStart(2, "0");
+        const minutes = String(Math.floor((timeLeft % 3600) / 60)).padStart(2, "0");
+        const seconds = String(timeLeft % 60).padStart(2, "0");
+        document.getElementById("countdown").textContent = `${hours}:${minutes}:${seconds}`;
+        if (timeLeft > 0) timeLeft--;
+      }
+      setInterval(updateCountdown, 1000);
 
-        const options = { year: "2-digit", month: "short", day: "2-digit" };
-        const formattedDate = today
-          .toLocaleDateString("en-GB", options)
-          .replace(/ /g, " ");
-        document.getElementById("booking-date").textContent = formattedDate;
-        document.getElementById("validity-date").textContent = formattedDate;
+      // QR Modal logic
+      document.getElementById("showQR").addEventListener("click", () => {
+        document.getElementById("qrModal").classList.remove("hidden");
+      });
+      document.getElementById("closeQR").addEventListener("click", () => {
+        document.getElementById("qrModal").classList.add("hidden");
       });
     </script>
   </body>
