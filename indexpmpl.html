@@ -21,7 +21,7 @@
       @keyframes blink-scale {
         0%,
         100% {
-          transform: scale(1.4);
+          transform: scale(2);
           opacity: 1;
         }
         50% {
@@ -69,9 +69,11 @@
       }
     </style>
   </head>
-  <body
-    class="bg-blue-100 flex items-center justify-center min-h-screen p-4 text-center"
-  >
+<body
+  id="body"
+  class="flex items-center justify-center min-h-screen p-4 text-center"
+>
+
     <!-- Top buttons -->
     <div class="absolute top-4 left-4">
       <button
@@ -100,7 +102,9 @@
     </div>
 
     <!-- Wrapper -->
-    <div class="w-full flex flex-col space-y-4 items-center justify-center min-h-screen">
+    <div
+      class="w-full flex flex-col space-y-4 items-center justify-center min-h-screen"
+    >
       <!-- Ticket Card -->
       <div
         class="bg-white rounded-lg shadow-lg w-full max-w-lg flex flex-col justify-between min-h-[550px]"
@@ -113,42 +117,45 @@
         </div>
 
         <!-- Content -->
-        <div class="px-2 py-2 sm:px-6 flex flex-col gap-2">
+        <div class="mt-[-50px] px-2 py-2 sm:px-6 flex flex-col gap-2">
           <!-- Pass Type, ID, Fare -->
           <div
-            class="flex justify-between items-center  text-base sm:text-lg font-semibold "
+            class="flex justify-between items-center text-base sm:text-lg font-semibold"
           >
-            <div class="flex-1 text-left ">
+            <div class="flex-1 text-left">
               <p class="text-gray-500 text-sm sm:text-base">Pass Type</p>
               <p class="font-bold text-lg sm:text-xl">PMC & PCMC</p>
             </div>
-            <div class="flex-1 text-center">
+            <div class="flex-20 text-left">
               <p class="text-gray-500 text-sm sm:text-base">ID</p>
               <p class="font-bold text-lg sm:text-xl">2203</p>
             </div>
             <div class="flex-1 text-right">
               <p class="text-gray-500 text-sm sm:text-base">Fare</p>
-              <p class="font-bold text-lg sm:text-xl">₹70</p>
+              <p class="font-bold text-lg sm:text-xl">₹70.83</p>
             </div>
           </div>
 
           <!-- Dashed line between Pass/Fare and Booking/Validity -->
           <div class="relative flex items-center my-3">
-            <div
-              class="absolute -left-7 w-8 h-8 bg-blue-100 rounded-full z-10"
-              style="
-                clip-path: circle(50% 100% at 100% 50%);
-                box-shadow: 0 0 0 0px #d1d5db00;
-              "
-            ></div>
+           <div
+  class="absolute -left-7 w-8 h-8 rounded-full z-10"
+  style="
+    clip-path: circle(50% 100% at 100% 50%);
+    box-shadow: 0 0 0 0px #d1d5db00;
+  "
+></div>
+            
+             
             <hr class="flex-1 border-t border-dashed border-gray-400 z-0" />
             <div
-              class="absolute -right-7 w-8 h-8 bg-blue-100 rounded-full z-10"
-              style="
-                clip-path: circle(50% 100% at 0% 50%);
-                box-shadow: 0 0 0 0px #d1d5db00;
-              "
-            ></div>
+  class="absolute -right-7 w-8 h-8 rounded-full z-10"
+  style="
+    clip-path: circle(50% 100% at 0% 50%);
+    box-shadow: 0 0 0 0px #d1d5db00;
+  "
+></div>
+
           </div>
 
           <!-- Booking / Validity -->
@@ -162,34 +169,34 @@
                 <span id="booking-time">07:55 AM</span>
               </p>
             </div>
-            <div class="flex-1 text-right">
+            <div class="flex-20 text-left">
               <p class="text-gray-500 text-sm sm:text-base">Validity Time</p>
               <p class="font-bold text-base sm:text-lg">
                 <span id="validity-date">17 Mar, 25</span> | 11:59 PM
               </p>
             </div>
           </div>
-          
         </div>
-<!-- Code (unique number) -->
-          <div>
-            <p class="text-center text-base sm:text-lg" id="unique-number">
-              2503171327DCQEW1
-            </p>
-            <hr class="border-t border-dashed border-gray-400 my-0" />
-            <div class="bg-red-600 text-white py-0 w-full">
-              <p class="text-base sm:text-lg text-center">One Day Pass</p>
-            </div>
+        <!-- Code (unique number) -->
+        <div class="mt-[-50px]">
+          <p class="text-center text-base sm:text-lg" id="unique-number">
+            2503171327DCQEW1
+          </p>
+          
+          <hr class="border-t border-dashed border-gray-400 my-0" />
+          <div class="bg-red-600 text-white py-0 w-full">
+            <p class="text-base sm:text-lg text-center">One Day Pass</p>
           </div>
+        </div>
 
-          <!-- Logo -->
-          <div class="flex justify-center my-2">
-            <img
-              src="unnamed (1).png"
-              alt="PMPML Logo"
-              class="w-24 h-24 sm:w-32 sm:h-32 pulse-logo"
-            />
-          </div>
+        <!-- Logo -->
+        <div class="flex justify-center my-2">
+          <img
+            src="unnamed (1).png"
+            alt="PMPML Logo"
+            class="w-24 h-24 sm:w-32 sm:h-32 pulse-logo"
+          />
+        </div>
         <!-- Expiry Bar -->
         <div class="bg-gray-100 text-gray-700 py-0 rounded-b-lg w-full">
           <p class="text-base sm:text-lg text-center">
@@ -329,6 +336,54 @@
       overlay.addEventListener("click", (e) => {
         if (e.target === overlay) closeModal();
       });
+  
+  
+  
+  function setDynamicCircleColors() {
+  const colors = [
+    '#4CAF50', // Sunday - Green
+    '#2196F3', // Monday - Blue
+    '#FF9800', // Tuesday - Orange
+    '#9C27B0', // Wednesday - Purple
+    '#F44336', // Thursday - Red
+    '#b3ff1a', // Friday - Cyan
+    //'#00BCD4', // Friday - Cyan
+    '#FFC107', // Saturday - Amber
+  ];
+  const dayIndex = new Date().getDay();
+  const circleLeft = document.querySelector('.absolute.-left-7.w-8.h-8.rounded-full.z-10');
+  const circleRight = document.querySelector('.absolute.-right-7.w-8.h-8.rounded-full.z-10');
+
+  if (circleLeft) circleLeft.style.backgroundColor = colors[dayIndex];
+  if (circleRight) circleRight.style.backgroundColor = colors[dayIndex];
+}
+// Call the function after DOM is loaded
+document.addEventListener('DOMContentLoaded', setDynamicCircleColors);
+
+
+  function setDynamicBackgroundColor() {
+  const colors = [
+    '#4CAF50', // Sunday - Green
+    '#2196F3', // Monday - Blue
+    '#FF9800', // Tuesday - Orange
+    '#9C27B0', // Wednesday - Purple
+    '#F44336', // Thursday - Red
+    '#b3ff1a', // Friday - Cyan
+    //'#00BCD4', // Friday - Cyan
+    '#FFC107', // Saturday - Amber
+  ];
+  const dayIndex = new Date().getDay();
+  document.getElementById('body').style.backgroundColor = colors[dayIndex];
+}
+
+// Call this along with circle colors on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  setDynamicBackgroundColor();
+  setDynamicCircleColors();
+});
+
+  // Scroll block karo
+document.body.style.overflow = 'hidden';
     </script>
   </body>
 </html>
