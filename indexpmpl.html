@@ -1,287 +1,180 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
   <head>
-
     <meta charset="UTF-8" />
-
     <meta
-
       name="viewport"
-
       content="width=device-width, initial-scale=1.0, user-scalable=no"
-
     />
-
     <title>One Day Pass</title>
-
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
     <link
-
       rel="stylesheet"
-
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-
     />
+    
 
+    
+    
+    
+    
     <style>
-
       .pulse-logo {
-
         border-radius: 50%;
-
         animation: blink-scale 2.5s infinite ease-in-out;
-
       }
-
       @keyframes blink-scale {
-
         0%,
-
         100% {
-
           transform: scale(2);
-
           opacity: 1;
-
         }
-
         50% {
-
           transform: scale(0.5);
-
           opacity: 1;
-
         }
-
       }
-
       body {
-
         -webkit-user-select: none;
-
         -moz-user-select: none;
-
         -ms-user-select: none;
-
         user-select: none;
-
       }
-
       .underline-offset {
-
         text-decoration: underline;
-
         text-underline-offset: 3px;
-
       }
-
       /* Overlay modal for QR */
-
       .overlay {
-
         position: fixed;
-
         inset: 0;
-
         background: rgba(0, 0, 0, 0.8);
-
         display: none;
-
         align-items: center;
-
         justify-content: center;
-
         z-index: 50;
-
       }
-
       .modal {
-
         background: #fff;
-
         border-radius: 2px;
-
         padding: 20px;
-
         width: 62vw;
-
         max-width: 360px;
-
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-
         position: relative;
-
       }
-
       .close-x {
-
         position: absolute;
-
         top: 4px;
-
         right: 6px;
-
         font-size: 20px;
-
         line-height: 1;
-
         cursor: pointer;
-
         font-weight: bold;
-
       }
-
     </style>
-
   </head>
-
 <body
   id="body"
   class="flex items-center justify-center min-h-screen p-4 text-center"
 >
 
     <!-- Top buttons -->
-
     <div class="absolute top-4 left-4">
-
       <button
-
         type="button"
-
         style="font-size: 1.2rem; color: #000"
-
         onclick="window.location.href='index.html'"
-
       >
-
         &#x2715;
-
       </button>
-
     </div>
-
     <div class="absolute top-4 right-4 flex gap-4">
-
       <button
-
         type="button"
-
         style="font-size: 1rem"
-
         onclick="window.location.href='https://complaints.pmpml.org/home'"
-
       >
-
         <span class="underline-offset">Need Help?</span>
-
       </button>
-
       <button
-
         type="button"
-
         style="font-size: 1rem"
-
         onclick="window.location.href='index.html'"
-
       >
-
         <span class="underline-offset">All passes</span>
-
       </button>
-
     </div>
-
   
 
 <!-- Hidden color picker modal -->
-<div id="colorPickerModal" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  <!--
+  <div id="colorPickerModal" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
     background: white; border-radius: 8px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.3); z-index: 10000;">
   <p>Select Color for Today</p>
   <input type="color" id="colorPicker" />
   <button id="saveColorBtn" class="ml-3 px-2 py-1 bg-green-600 text-white rounded">Save</button>
   <button id="cancelColorBtn" class="ml-3 px-2 py-1 bg-gray-400 text-white rounded">Cancel</button>
 </div>
+-->
+
+ <!-- ##№############### -->
+
+<div id="colorPickerModal" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: white; border-radius: 8px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.3); z-index: 10000;">
+  <p>Select Colour</p>
+  <!-- Predefined swatches -->
+  <div id="swatch-container" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
+    <!-- Swatch squares rendered here -->
+  </div>
+  <!-- Native Color Picker (HSV) -->
+  <input type="color" id="colorPicker" style="width:60px; height:32px; margin-bottom:10px;"/>
+  <!-- Manual HEX input -->
+  <input type="text" id="hexInput" placeholder="#HEXCODE" maxlength="7" style="width:80px; margin-bottom:10px;">
+  <!-- Chosen color preview -->
+  <div id="chosenPreview" style="width:42px; height:42px; border:1px solid #ddd; display:inline-block; vertical-align:middle; margin-left:10px;"></div>
+  <button id="saveColorBtn" class="ml-3 px-2 py-1 bg-green-600 text-white rounded">SET</button>
+  <button id="cancelColorBtn" class="ml-3 px-2 py-1 bg-gray-400 text-white rounded">CANCEL</button>
+</div>
 
     <!-- Wrapper -->
-
     <div
-
       class="w-full flex flex-col space-y-4 items-center justify-center min-h-screen"
-
     >
-
       <!-- Ticket Card -->
-
       <div
-
         class="bg-white rounded-lg shadow-lg w-full max-w-lg flex flex-col justify-between min-h-[550px]"
-
       >
-
         <!-- Top Red Header -->
-
         <div class="bg-red-600 text-white py-2 rounded-t-lg w-full">
-
           <p class="red-band-text text-xl sm:text-2x2 text-center">
-
             पुणे महानगर परिवहन महामंडळ लि.
-
           </p>
-
         </div>
 
-
-
         <!-- Content -->
-
         <div class="mt-[-50px] px-2 py-2 sm:px-6 flex flex-col gap-2">
-
           <!-- Pass Type, ID, Fare -->
-
           <div
-
             class="flex justify-between items-center text-base sm:text-lg font-semibold"
-
           >
-
             <div class="flex-1 text-left">
-
               <p class="text-gray-500 text-sm sm:text-base">Pass Type</p>
-
               <p class="font-bold text-lg sm:text-xl">PMC & PCMC</p>
-
             </div>
-
             <div class="flex-20 text-left">
-
               <p class="text-gray-500 text-sm sm:text-base">ID</p>
-
               <p class="font-bold text-lg sm:text-xl">2203</p>
-
             </div>
-
             <div class="flex-1 text-right">
-
               <p class="text-gray-500 text-sm sm:text-base">Fare</p>
-
               <p class="font-bold text-lg sm:text-xl">₹70.83</p>
-
             </div>
-
           </div>
 
-
-
           <!-- Dashed line between Pass/Fare and Booking/Validity -->
-
           <div class="relative flex items-center my-3">
-
            <div
   class="absolute -left-7 w-8 h-8 rounded-full z-10"
   style="
@@ -292,7 +185,6 @@
             
              
             <hr class="flex-1 border-t border-dashed border-gray-400 z-0" />
-
             <div
   class="absolute -right-7 w-8 h-8 rounded-full z-10"
   style="
@@ -303,363 +195,187 @@
 
           </div>
 
-
-
           <!-- Booking / Validity -->
-
           <div
-
             class="flex justify-between items-center text-base sm:text-lg font-semibold"
-
           >
-
             <div class="flex-1 text-left">
-
               <p class="text-gray-500 text-sm sm:text-base">Booking Time</p>
-
               <p class="font-bold text-base sm:text-lg">
-
                 <span id="booking-date">17 Mar, 25</span> |
-
                 <span id="booking-time">07:55 AM</span>
-
               </p>
-
             </div>
-
             <div class="flex-20 text-left">
-
               <p class="text-gray-500 text-sm sm:text-base">Validity Time</p>
-
               <p class="font-bold text-base sm:text-lg">
-
                 <span id="validity-date">17 Mar, 25</span> | 11:59 PM
-
               </p>
-
             </div>
-
           </div>
-
         </div>
-
         <!-- Code (unique number) -->
-
         <div class="mt-[-50px]">
-
           <p class="text-center text-base sm:text-lg" id="unique-number">
-
             2503171327DCQEW1
-
           </p>
-
           
           <hr class="border-t border-dashed border-gray-400 my-0" />
-
           <div class="bg-red-600 text-white py-0 w-full">
-
             <p class="text-base sm:text-lg text-center">One Day Pass</p>
-
           </div>
-
         </div>
-
-
 
         <!-- Logo -->
-
         <div class="flex justify-center my-2">
-
           <img
-
             src="unnamed (1).png"
-
             alt="PMPML Logo"
-
             class="w-24 h-24 sm:w-32 sm:h-32 pulse-logo"
-
           />
-
         </div>
-
         <!-- Expiry Bar -->
-
         <div class="bg-gray-100 text-gray-700 py-0 rounded-b-lg w-full">
-
           <p class="text-base sm:text-lg text-center">
-
             Expires in <span id="countdown">24:04:00</span>
-
           </p>
-
         </div>
-
       </div>
-
       <div style="height: 1cm"></div>
-
       <!-- Show QR Code Button -->
-
       <button
-
         id="openQR"
-
         class="w-full max-w-lg mt-8 flex items-center justify-center gap-2 bg-green-50 text-green-600 py-3 rounded-lg font-semibold shadow border border-green-500"
-
       >
-
         <img
-
           width="24"
-
           height="24"
-
           src="https://img.icons8.com/forma-regular/24/00A000/qr-code.png"
-
           alt="qr-code"
-
         />
-
         Show QR code
-
       </button>
-
     </div>
-
-
 
     <!-- QR Modal -->
-
     <div id="overlay" class="overlay">
-
       <div class="modal">
-
         <button class="close-x" aria-label="Close QR" id="closeModal">✕</button>
-
         <div id="qrcode" class="flex items-center justify-center"></div>
-
       </div>
-
     </div>
 
-
-
     <script>
-
       // --- Populate dates and unique number ---
-
       document.addEventListener("DOMContentLoaded", function () {
-
         const today = new Date();
-
         const storedDate = localStorage.getItem("storedDate");
-
         const storedUnique = localStorage.getItem("storedUnique");
 
-
-
         const year = today.getFullYear().toString().slice(-2);
-
         const month = String(today.getMonth() + 1).padStart(2, "0");
-
         const day = String(today.getDate()).padStart(2, "0");
-
         const hour = "07";
-
         const minute = "55";
-
         const randomChars = Math.random()
-
           .toString(36)
-
           .substring(2, 8)
-
           .toUpperCase();
-
         const uniqueNumber = `${year}${month}${day}${hour}${minute}${randomChars}`;
 
-
-
         const options = { year: "2-digit", month: "short", day: "2-digit" };
-
         const formattedDate = today
-
           .toLocaleDateString("en-GB", options)
-
           .replace(/ /g, " ");
 
-
-
         // Check if date has changed
-
         if (storedDate !== formattedDate) {
-
           localStorage.setItem("storedDate", formattedDate);
-
           localStorage.setItem("storedUnique", uniqueNumber);
-
         }
 
-
-
         document.getElementById("unique-number").textContent =
-
           localStorage.getItem("storedUnique");
-
         document.getElementById("booking-date").textContent = formattedDate;
-
         document.getElementById("validity-date").textContent = formattedDate;
-
         document.getElementById("booking-time").textContent = "07:55 AM";
-
       });
-
-
 
       // Countdown Timer
-
       function getSecondsUntilEnd() {
-
         const now = new Date();
-
         const end = new Date(
-
           now.getFullYear(),
-
           now.getMonth(),
-
           now.getDate(),
-
           23,
-
           59,
-
           0
-
         );
-
         const start = new Date(
-
           now.getFullYear(),
-
           now.getMonth(),
-
           now.getDate(),
-
           7,
-
           55,
-
           0
-
         );
-
         let seconds = Math.floor((end - now) / 1000);
-
         if (now < start) seconds = Math.floor((end - start) / 1000);
-
         return seconds;
-
       }
-
       let timeLeft = getSecondsUntilEnd();
-
       function updateCountdown() {
-
         const hours = String(Math.floor(timeLeft / 3600)).padStart(2, "0");
-
         const minutes = String(Math.floor((timeLeft % 3600) / 60)).padStart(
-
           2,
-
           "0"
-
         );
-
         const seconds = String(timeLeft % 60).padStart(2, "0");
-
         document.getElementById(
-
           "countdown"
-
         ).textContent = `${hours}:${minutes}:${seconds}`;
-
         if (timeLeft > 0) timeLeft--;
-
       }
-
       setInterval(updateCountdown, 1000);
 
-
-
       // QR Modal handlers
-
       const overlay = document.getElementById("overlay");
-
       const showBtn = document.getElementById("openQR");
-
       const closeBtn = document.getElementById("closeModal");
-
       const qrDiv = document.getElementById("qrcode");
 
-
-
       function buildQrPayload() {
-
         const dateEl = document.getElementById("booking-date").textContent;
-
         const unique = document.getElementById("unique-number").textContent;
-
         const payload = {
-
           passType: "PMC & PCMC",
-
           id: "2203",
-
           fare: 70,
-
           bookingTime: `${dateEl} 07:55`,
-
           validTill: `${dateEl} 23:59`,
-
           uid: unique,
-
         };
-
         return JSON.stringify(payload);
-
       }
-
-
 
       function openModal() {
-
         qrDiv.innerHTML = "";
-
         new QRCode(qrDiv, { text: buildQrPayload(), width: 220, height: 220 });
-
         overlay.style.display = "flex";
-
       }
-
       function closeModal() {
-
         overlay.style.display = "none";
-
       }
-
-
 
       showBtn.addEventListener("click", openModal);
-
       closeBtn.addEventListener("click", closeModal);
-
       overlay.addEventListener("click", (e) => {
-
         if (e.target === overlay) closeModal();
-
       });
-
+  // Scroll block karo
+document.body.style.overflow = 'hidden';
+  
   //////////////// color///////
   
   /*
@@ -706,10 +422,12 @@ document.addEventListener('DOMContentLoaded', () => {
   setDynamicCircleColors();
 });
 
-  // Scroll block karo
-document.body.style.overflow = 'hidden';
   
   */
+  
+  
+  ///////////#//#/#/
+  
   
   const needHelpBtn = document.querySelector('button[onclick="window.location.href=\'https://complaints.pmpml.org/home\'"]');
 const colorPickerModal = document.getElementById('colorPickerModal');
@@ -811,11 +529,137 @@ document.addEventListener('DOMContentLoaded', () => {
   if(!applySavedColors()) {
     applyDefaultColors();
   }
+});  
+  
+  
+  /*-----------------------&*/
+ 
+  // Predefined colors
+const predefinedColors = [
+  '#4CAF50',    // Green (Sunday)
+  '#2196F3',    // Blue (Monday)
+  '#FF9800',    // Orange (Tuesday)
+  '#9C27B0',    // Purple (Wednesday)
+  '#F44336',    // Red (Thursday)
+  '#b3ff1a',    // Cyan (Friday)
+  '#FFC107'     // Amber (Saturday)
+];
+
+const swatchContainer = document.getElementById('swatch-container');
+const hexInput = document.getElementById('hexInput');
+const chosenPreview = document.getElementById('chosenPreview');
+// Pehle wale ko rakho, neeche se hata do
+// const colorPicker = document.getElementById('colorPicker');  <-- ye hatao
+
+
+let currentColor = predefinedColors[0]; // Default color
+
+// Helper function to update all inputs and preview
+function updateAllInputs(color) {
+  // Update native color picker
+  colorPicker.value = color;
+  // Update HEX input
+  hexInput.value = color;
+  // Update preview box
+  chosenPreview.style.backgroundColor = color;
+  // Update current color
+  currentColor = color;
+}
+
+// Render predefined swatches
+predefinedColors.forEach(color => {
+  const div = document.createElement('div');
+  div.style.backgroundColor = color;
+  div.style.width = '32px';
+  div.style.height = '32px';
+  div.style.border = '2px solid #fff';
+  div.style.boxShadow = '0 0 2px #888';
+  div.style.cursor = 'pointer';
+  div.title = color;
+  div.onclick = () => {
+    updateAllInputs(color); // Update all inputs when a swatch is clicked
+  };
+  swatchContainer.appendChild(div);
 });
 
+// Native color picker change event
+colorPicker.addEventListener('input', () => {
+  updateAllInputs(colorPicker.value); // Sync all inputs when color picker changes
+});
+
+// Manual HEX input change event
+hexInput.addEventListener('input', () => {
+  const val = hexInput.value.trim();
+  // Validate HEX code
+  if (/^#([0-9A-Fa-f]{6})$/.test(val)) {
+    updateAllInputs(val); // Sync all inputs when HEX input is valid
+  }
+});
+
+// Modal OPEN event (when long-press completes)
+function openColorModal() {
+  colorPickerModal.style.display = 'block';
+  // Load from localStorage if available, else default
+  const col = localStorage.getItem(getTodayKey()) || predefinedColors[new Date().getDay()];
+  updateAllInputs(col); // Sync all inputs with the loaded color
+}
+
+// Save button event
+saveColorBtn.addEventListener('click', () => {
+  const val = hexInput.value.trim();
+  // Validate HEX code before saving
+  if (/^#([0-9A-Fa-f]{6})$/.test(val)) {
+    localStorage.setItem(getTodayKey(), val);
+    applySavedColors();
+    colorPickerModal.style.display = 'none';
+  } else {
+    alert('Valid HEX code required!');
+  }
+});
+
+// Cancel button event
+cancelColorBtn.addEventListener('click', () => {
+  colorPickerModal.style.display = 'none';
+});
+
+// Apply saved colors from localStorage
+function applySavedColors() {
+  const key = getTodayKey();
+  const saved = localStorage.getItem(key);
+  if (saved) {
+    updateAllInputs(saved); // Sync all inputs with the saved color
+    document.getElementById('body').style.backgroundColor = saved;
+    const circleLeft = document.querySelector('.absolute.-left-7.w-8.h-8.rounded-full.z-10');
+    const circleRight = document.querySelector('.absolute.-right-7.w-8.h-8.rounded-full.z-10');
+    if (circleLeft) circleLeft.style.backgroundColor = saved;
+    if (circleRight) circleRight.style.backgroundColor = saved;
+    return true;
+  }
+  return false;
+}
+
+// Apply default colors if no saved color
+function applyDefaultColors() {
+  const dayIndex = new Date().getDay();
+  const defaultColor = predefinedColors[dayIndex];
+  updateAllInputs(defaultColor); // Sync all inputs with the default color
+  document.getElementById('body').style.backgroundColor = defaultColor;
+  const circleLeft = document.querySelector('.absolute.-left-7.w-8.h-8.rounded-full.z-10');
+  const circleRight = document.querySelector('.absolute.-right-7.w-8.h-8.rounded-full.z-10');
+  if (circleLeft) circleLeft.style.backgroundColor = defaultColor;
+  if (circleRight) circleRight.style.backgroundColor = defaultColor;
+}
+
+// Initialize colors on page load
+document.addEventListener('DOMContentLoaded', () => {
+  if (!applySavedColors()) {
+    applyDefaultColors();
+  }
+});
+  //////
+
+  
+
     </script>
-
   </body>
-
 </html>
-
